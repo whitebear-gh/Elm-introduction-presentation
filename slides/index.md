@@ -6,45 +6,78 @@
 
 ***
 
-## React Native with F#
+## Elm language introduction
 
 <br />
 <br />
 
-### Modern mobile app development
+### different approach to websites development
 
 <br />
 <br />
-Steffen Forkmann - [@sforkmann](http://www.twitter.com/sforkmann)
+Krzyś Jaworski - [@whitebear-gh](https://github.com/whitebear-gh/Elm-introduction-presentation/)
+
+Inspired by: [Why Elm?](https://www.youtube.com/watch?v=rU-W6557Dos&t=139s) [Elm with F#](https://twitter.com/sforkmann)
 
 ***
 
-### Modern mobile app development?
+### Current patterns: 
 
-* UI/UX
-    * "Native mobile apps"
-    * Performance
-* Tooling
-    * Hot loading
-    * IntelliSense
-* Maintainability
-    * Easy to debug
-    * Correctness
+* MVC
+* MVVM
+* MV - whatever
 
 ---
 
-### "Native" UI
+### Two way binding
+### Dirty checks... 
 
- <img src="images/meter.png" style="background: transparent; border-style: none;"  width=300 />
+ <img src="images/elm-two-way-data-binding-angularjs.jpg" style="background: transparent; border-style: none;"  width=500 />
 
 ---
 
-### Tooling
+### observables....
 
-<img src="images/hotloading.gif" style="background: transparent; border-style: none;"  />
+* At some points there was even Object.observe added to browsers...
+
+---
+
+## Nowadays frameworks prefer one-way bindnings
+
+* React
+* Angular 2+
+* ....
 
 *** 
 
+## So, what is the issue here?
+
+* MVC works quite nice on the servers with stateless HTTP requests 
+* But in the browser... Data changes constantly, a lot of refreshes etc (similar to desktop apps like WPF)
+
+
+---
+
+## State of the application
+
+* Apps in browser are not stateless
+* Single Source of truth
+* One big JS object with (?)
+* 
+
+---
+
+## Hard to track where changes were done
+
+ <img src="images/elm-angular-code.png" style="background: white;" width=500 />
+
+---
+
+
+## Immutability 
+
+
+*** 
 ### Model - View - Update
 
 #### "Elm - Architecture"
