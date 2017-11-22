@@ -63,7 +63,6 @@ Inspired by: [Why Elm?](https://www.youtube.com/watch?v=rU-W6557Dos&t=139s) [Elm
 * Apps in browser are not stateless
 * Single Source of truth
 * One big JS object with (?)
-* 
 
 ---
 
@@ -73,14 +72,294 @@ Inspired by: [Why Elm?](https://www.youtube.com/watch?v=rU-W6557Dos&t=139s) [Elm
 
 ---
 
-
 ## Immutability 
 
+* To avoid two way changes
+* thread safe
+* ...
+
+
+***
+
+
+
+## ELM
+
+### Soo... What is ELM ?
+
+* Purely functional functional language for front-end web development
+
+
+---
+
+## Functional ????
+
+#### .... ->
+
+
+---
+
+## Programming languages 
+
+
+| Functional  | Imperative  |
+|:-:|:-:|
+| Series of expressions   | series of statements  |
+| Immutable state | mutable state |
+| purity ( same inputs -> same output)  | side effects |
+
+--- 
+
+## Yeah... but why ELM ?? 
+
+### What is so unique in it?
+
+* Functional but beginner friendly 
+    - Easy to understand concepts / learn
+    - Nice introduction to functional world
+* Statically typed
+* Immutable data
+* Funtional types system - no null
+* No runtime excpetions
+* Consistent management of state (famous ELM architecture)
+* Interoperability with JavaScript
+    * compiles to JS
+* ELM time debugger
+* ...
+
+---
+
+## Ok, Ok, but... functional?!
+
+---
+
+### Functions
+
+```elm
+add1: number -> number
+add1 x = x + 1
+
+add: number -> number -> number
+add x y = x + y
+```
+
+---
+
+### Partial Application
+
+```elm
+add: number -> number -> number
+add x y = x + y
+
+add2: number -> number
+add2 = add 2
+
+-- add2 y = add 2 y
+```
+
+---
+
+### Function Composition
+
+```elm
+isEven: Int -> Bool
+isEven n = n % 2 ==0
+
+-- (<<) (b -> c) -> (a -> b) -> a -> c
+-- not: Bool -> Bool
+
+isOdd: Int -> Bool
+isOdd: not << isEven
+```
+
+---
+
+### Function Application
+
+* pipe operator
+
+```elm
+(|>) : a -> (a -> b) -> b
+-- x |> f == f x 
+
+func: List number -> String
+func list = list
+                |> List.filter (\x -> x > 2)
+                |> List.length
+                |> toString
+-- func [1,2,3,4,5] == "3"
+
+-- alternatively: 
+func = toString << List.length << List.filter (\x -> x > 2)
+```
+
+---
+
+### Pattern matching
+
+```elm
+listSum: List number -> number
+listSum: list =
+    case list of 
+        [] -> 0
+        x::xs -> x + listSum xs
+
+listLength: List a -> number
+listLength: list =
+    case list of 
+        [] -> 0
+        _::xs -> 1 + listLength xs
+```
+---
+
+### Functions as first class values
+
+```elm
+listFilter: (a -> Bool) -> List a -> List a
+listFilter: fn list =
+    case list of 
+        [] -> []
+        x::xs -> 
+            f fn x then x::(listFilter fn xs)
+            else listFilter fn xs
+```
+---
+
+### Type Aliases
+
+```elm
+type alias UserName = String
+type alias UserId = Int
+type alias User = 
+    { name: UserName
+    , id: IserId
+    }
+-- helpful with designing by types
+```
+
+---
+
+### Union Types
+
+```elm
+type Msg 
+    = Increment
+    | Decrement
+    | SetValue Int
+```
+
+---
+
+### Tuples
+
+```elm
+myTuple = ("A", "B", "C")
+myNestedTuple = ("A", "B", "C", ("X", "Y", "Z"))
+
+let
+  (a,b,c) = myTuple
+in 
+  a ++ b ++ c
+-- "ABC" : String
+
+let
+  (a,b,c,(x,y,z)) = myNestedTuple
+in
+  a ++ b ++ c ++ x ++ y ++ z
+-- "ABCXYZ" : String
+```
+
+---
+
+### Tuples - pattern matching
+
+```elm
+isOrdered : (String, String, String) -> String
+isOrdered tuple =
+ case tuple of
+  ("A","B","C") as orderedTuple ->
+    toString orderedTuple ++ " is an ordered tuple."
+    
+  (_,_,_) as unorderedTuple ->
+    toString unorderedTuple ++ " is an unordered tuple."
+
+
+> isOrdered myTuple
+-- "(\"A\",\"B\",\"C\") is an ordered tuple."
+
+> isOrdered ("B", "C", "A")
+-- "(\"B\",\"C\",\"A\") is an unordered tuple."
+```
+
+---
+
+### Examples ...
+
+```elm
+type Visibility = All | Active | Completed
+
+> All
+All : Visibility
+
+> Active
+Active : Visibility
+
+> Completed
+Completed : Visibility
+```
+
+---
+
+### ... Examples ...
+
+```elm
+type alias Task = { task : String, complete : Bool }
+
+buy : Task
+buy =
+  { task = "Buy milk", complete = True }
+
+drink : Task
+drink =
+  { task = "Drink milk", complete = False }
+
+tasks : List Task
+tasks =
+  [ buy, drink ]
+
+-- keep : Visibility -> List Task -> List Task
+
+-- keep All tasks == [buy,drink]
+-- keep Active tasks == [drink]
+-- keep Complete tasks == [buy]
+```
+
+---
+
+### ... Examples
+
+```elm
+type Visibility = All | Active | Completed
+type alias Task = { task : String, complete : Bool }
+
+filterTasks : Visibility -> List Task -> List Task
+filterTasks visibility tasks =
+  case visibility of
+    All ->
+      tasks
+
+    Active ->
+      List.filter (\task -> not task.complete) tasks
+
+    Completed ->
+      List.filter (\task -> task.complete) tasks
+```
 
 *** 
+
 ### Model - View - Update
 
-#### "Elm - Architecture"
+### "Elm - Architecture"
 
  <img src="images/Elm.png" style="background: white;" width=700 />
 
@@ -88,133 +367,57 @@ Inspired by: [Why Elm?](https://www.youtube.com/watch?v=rU-W6557Dos&t=139s) [Elm
  <small>http://danielbachler.de/2016/02/11/berlinjs-talk-about-elm.html</small>
 
 
---- 
+---
 
 ### Model - View - Update
 
-    // MODEL
 
-    type Model = int
+```elm
+type alias Model = (...) -- record type
 
-    type Msg =
-    | Increment
+type Msg = (...) -- union
+
+update : Msg -> Model -> (Model, Cmd Msg)
+update msg model = (...)
+
+view : Model -> Html Msg
+view model = (...)
+```
+---
+
+### Model - View - Update
+
+
+```elm
+type Msg 
+    = Increment 
     | Decrement
 
-    let init() : Model = 0
+update msg model =
+  case msg of
+    Increment ->
+      model + 1
 
+    Decrement ->
+      model - 1
+
+```
 ---
 
 ### Model - View - Update
 
-    // VIEW
 
-    let view model dispatch =
-        div []
-            [ button [ OnClick (fun _ -> dispatch Decrement) ] [ str "-" ]
-              div [] [ str (model.ToString()) ]
-              button [ OnClick (fun _ -> dispatch Increment) ] [ str "+" ] ]
+```elm
+view model =
+  div []
+    [ button [ onClick Decrement ] [ text "-" ]
+    , div [] [ text (toString model) ]
+    , button [ onClick Increment ] [ text "+" ]
+    ]
+```
 
----
-
-### Model - View - Update
-
-    // UPDATE
-
-    let update (msg:Msg) (model:Model) =
-        match msg with
-        | Increment -> model + 1
-        | Decrement -> model - 1
-
----
-
-### Model - View - Update
-
-    // wiring things up
-
-    Program.mkSimple init update view
-    |> Program.withConsoleTrace
-    |> Program.withReact "elmish-app"
-    |> Program.run
-
----
-
-### Model - View - Update
-
-# Demo
-
-***
-
-### Sub-Components
-
-    // MODEL
-
-    type Model = {
-        Counters : Counter.Model list
-    }
-
-    type Msg = 
-    | Insert
-    | Remove
-    | Modify of int * Counter.Msg
-
-    let init() : Model =
-        { Counters = [] }
-
----
-
-### Sub-Components
-
-    // VIEW
-
-    let view model dispatch =
-        let counterDispatch i msg = dispatch (Modify (i, msg))
-
-        let counters =
-            model.Counters
-            |> List.mapi (fun i c -> Counter.view c (counterDispatch i)) 
-        
-        div [] [ 
-            yield button [ OnClick (fun _ -> dispatch Remove) ] [  str "Remove" ]
-            yield button [ OnClick (fun _ -> dispatch Insert) ] [ str "Add" ] 
-            yield! counters ]
-
----
-
-### Sub-Components
-
-    // UPDATE
-
-    let update (msg:Msg) (model:Model) =
-        match msg with
-        | Insert ->
-            { Counters = Counter.init() :: model.Counters }
-        | Remove ->
-            { Counters = 
-                match model.Counters with
-                | [] -> []
-                | x :: rest -> rest }
-        | Modify (id, counterMsg) ->
-            { Counters =
-                model.Counters
-                |> List.mapi (fun i counterModel -> 
-                    if i = id then
-                        Counter.update counterMsg counterModel
-                    else
-                        counterModel) }
-
----
-
-### Sub-Components
-
-# Demo
-
-***
-
-### React
-
-* Facebook library for UI 
-* <code>state => view</code>
-* Virtual DOM
+<br/>
+<br/>
 
 ---
 
@@ -262,30 +465,25 @@ Inspired by: [Why Elm?](https://www.youtube.com/watch?v=rU-W6557Dos&t=139s) [Elm
  <small>http://teropa.info/blog/2015/03/02/change-and-its-detection-in-javascript-frameworks.html</small>
 
 
-*** 
+---
 
-### ReactNative
+### Model - View - Update
 
- <img src="images/ReactNative.png" style="background: white;" />
-
-
- <small>http://timbuckley.github.io/react-native-presentation</small>
+# [Demo](http://elm-lang.org/examples/buttons)
 
 ***
-
-### Show me the code
-
-*** 
 
 ### TakeAways
 
 * Learn all the FP you can!
 * Simple modular design
+* .Net fans? F# (Fable) + Elm!  
 
 *** 
 
 ### Thank you!
-
+* https://www.youtube.com/watch?v=vgsckgtVdoQ
+* https://gist.github.com/yang-wei/4f563fbf81ff843e8b1e
 * https://github.com/fable-compiler/fable-elmish
 * https://ionide.io
 * https://facebook.github.io/react-native/
