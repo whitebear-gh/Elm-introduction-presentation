@@ -17,7 +17,10 @@
 <br />
 Krzyś Jaworski - [@whitebear-gh](https://github.com/whitebear-gh/Elm-introduction-presentation/)
 
-Inspired by: [Why Elm?](https://www.youtube.com/watch?v=rU-W6557Dos&t=139s) [Elm with F#](https://twitter.com/sforkmann)
+Inspired by: 
+* [Why Elm?](https://www.youtube.com/watch?v=rU-W6557Dos&t=139s)
+* [Introduction to ELM](https://www.youtube.com/watch?v=vgsckgtVdoQ)
+* [Elm with F#](https://twitter.com/sforkmann)
 
 ***
 
@@ -478,6 +481,7 @@ view model =
 * Learn all the FP you can!
 * Simple modular design
 * .Net fans? F# (Fable) + Elm!  
+* [elm-lang.org/try](http://elm-lang.org/try)
 
 *** 
 
