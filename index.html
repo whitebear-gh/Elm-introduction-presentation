@@ -46,12 +46,7 @@
 </head>
 <body>
     <div class="reveal">
-        <div class="tip" id="fs1">Multiple items<br />val int : value:&#39;T -&gt; int (requires member op_Explicit)<br /><br />Full name: Microsoft.FSharp.Core.Operators.int<br /><br />--------------------<br />type int = int32<br /><br />Full name: Microsoft.FSharp.Core.int<br /><br />--------------------<br />type int&lt;&#39;Measure&gt; = int<br /><br />Full name: Microsoft.FSharp.Core.int&lt;_&gt;</div>
-<div class="tip" id="fs2">type &#39;T list = List&lt;&#39;T&gt;<br /><br />Full name: Microsoft.FSharp.Collections.list&lt;_&gt;</div>
-<div class="tip" id="fs3">Multiple items<br />module List<br /><br />from Microsoft.FSharp.Collections<br /><br />--------------------<br />type List&lt;&#39;T&gt; =<br />&#160;&#160;| ( [] )<br />&#160;&#160;| ( :: ) of Head: &#39;T * Tail: &#39;T list<br />&#160;&#160;interface IEnumerable<br />&#160;&#160;interface IEnumerable&lt;&#39;T&gt;<br />&#160;&#160;member GetSlice : startIndex:int option * endIndex:int option -&gt; &#39;T list<br />&#160;&#160;member Head : &#39;T<br />&#160;&#160;member IsEmpty : bool<br />&#160;&#160;member Item : index:int -&gt; &#39;T with get<br />&#160;&#160;member Length : int<br />&#160;&#160;member Tail : &#39;T list<br />&#160;&#160;static member Cons : head:&#39;T * tail:&#39;T list -&gt; &#39;T list<br />&#160;&#160;static member Empty : &#39;T list<br /><br />Full name: Microsoft.FSharp.Collections.List&lt;_&gt;</div>
-<div class="tip" id="fs4">val mapi : mapping:(int -&gt; &#39;T -&gt; &#39;U) -&gt; list:&#39;T list -&gt; &#39;U list<br /><br />Full name: Microsoft.FSharp.Collections.List.mapi</div>
-<div class="tip" id="fs5">val id : x:&#39;T -&gt; &#39;T<br /><br />Full name: Microsoft.FSharp.Core.Operators.id</div>
-
+        
         <!-- Any section element inside of this container is displayed as a slide -->
         <div class="slides">
             <section >
@@ -323,7 +318,7 @@ listFilter: fn list =
 </code></pre></td></tr></table>
 </section>
 <section >
-<h3>Aliases and Union Types</h3>
+<h3>Type Aliases</h3>
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -339,6 +334,188 @@ type alias User =
     , id: IserId
     }
 -- helpful with designing by types
+</code></pre></td></tr></table>
+</section>
+<section >
+<h3>Union Types</h3>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
+<span class="l">2: </span>
+<span class="l">3: </span>
+<span class="l">4: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip"><code lang="elm">type Msg 
+    = Increment
+    | Decrement
+    | SetValue Int
+</code></pre></td></tr></table>
+</section>
+<section >
+<h3>Tuples</h3>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
+<span class="l"> 2: </span>
+<span class="l"> 3: </span>
+<span class="l"> 4: </span>
+<span class="l"> 5: </span>
+<span class="l"> 6: </span>
+<span class="l"> 7: </span>
+<span class="l"> 8: </span>
+<span class="l"> 9: </span>
+<span class="l">10: </span>
+<span class="l">11: </span>
+<span class="l">12: </span>
+<span class="l">13: </span>
+<span class="l">14: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip"><code lang="elm">myTuple = ("A", "B", "C")
+myNestedTuple = ("A", "B", "C", ("X", "Y", "Z"))
+
+let
+  (a,b,c) = myTuple
+in 
+  a ++ b ++ c
+-- "ABC" : String
+
+let
+  (a,b,c,(x,y,z)) = myNestedTuple
+in
+  a ++ b ++ c ++ x ++ y ++ z
+-- "ABCXYZ" : String
+</code></pre></td></tr></table>
+</section>
+<section >
+<h3>Tuples - pattern matching</h3>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
+<span class="l"> 2: </span>
+<span class="l"> 3: </span>
+<span class="l"> 4: </span>
+<span class="l"> 5: </span>
+<span class="l"> 6: </span>
+<span class="l"> 7: </span>
+<span class="l"> 8: </span>
+<span class="l"> 9: </span>
+<span class="l">10: </span>
+<span class="l">11: </span>
+<span class="l">12: </span>
+<span class="l">13: </span>
+<span class="l">14: </span>
+<span class="l">15: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip"><code lang="elm">isOrdered : (String, String, String) -&gt; String
+isOrdered tuple =
+ case tuple of
+  ("A","B","C") as orderedTuple -&gt;
+    toString orderedTuple ++ " is an ordered tuple."
+    
+  (_,_,_) as unorderedTuple -&gt;
+    toString unorderedTuple ++ " is an unordered tuple."
+
+
+&gt; isOrdered myTuple
+-- "(\"A\",\"B\",\"C\") is an ordered tuple."
+
+&gt; isOrdered ("B", "C", "A")
+-- "(\"B\",\"C\",\"A\") is an unordered tuple."
+</code></pre></td></tr></table>
+</section>
+<section >
+<h3>Examples ...</h3>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
+<span class="l"> 2: </span>
+<span class="l"> 3: </span>
+<span class="l"> 4: </span>
+<span class="l"> 5: </span>
+<span class="l"> 6: </span>
+<span class="l"> 7: </span>
+<span class="l"> 8: </span>
+<span class="l"> 9: </span>
+<span class="l">10: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip"><code lang="elm">type Visibility = All | Active | Completed
+
+&gt; All
+All : Visibility
+
+&gt; Active
+Active : Visibility
+
+&gt; Completed
+Completed : Visibility
+</code></pre></td></tr></table>
+</section>
+<section >
+<h3>... Examples ...</h3>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
+<span class="l"> 2: </span>
+<span class="l"> 3: </span>
+<span class="l"> 4: </span>
+<span class="l"> 5: </span>
+<span class="l"> 6: </span>
+<span class="l"> 7: </span>
+<span class="l"> 8: </span>
+<span class="l"> 9: </span>
+<span class="l">10: </span>
+<span class="l">11: </span>
+<span class="l">12: </span>
+<span class="l">13: </span>
+<span class="l">14: </span>
+<span class="l">15: </span>
+<span class="l">16: </span>
+<span class="l">17: </span>
+<span class="l">18: </span>
+<span class="l">19: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip"><code lang="elm">type alias Task = { task : String, complete : Bool }
+
+buy : Task
+buy =
+  { task = "Buy milk", complete = True }
+
+drink : Task
+drink =
+  { task = "Drink milk", complete = False }
+
+tasks : List Task
+tasks =
+  [ buy, drink ]
+
+-- keep : Visibility -&gt; List Task -&gt; List Task
+
+-- keep All tasks == [buy,drink]
+-- keep Active tasks == [drink]
+-- keep Complete tasks == [buy]
+</code></pre></td></tr></table>
+</section>
+<section >
+<h3>... Examples</h3>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
+<span class="l"> 2: </span>
+<span class="l"> 3: </span>
+<span class="l"> 4: </span>
+<span class="l"> 5: </span>
+<span class="l"> 6: </span>
+<span class="l"> 7: </span>
+<span class="l"> 8: </span>
+<span class="l"> 9: </span>
+<span class="l">10: </span>
+<span class="l">11: </span>
+<span class="l">12: </span>
+<span class="l">13: </span>
+<span class="l">14: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip"><code lang="elm">type Visibility = All | Active | Completed
+type alias Task = { task : String, complete : Bool }
+
+filterTasks : Visibility -&gt; List Task -&gt; List Task
+filterTasks visibility tasks =
+  case visibility of
+    All -&gt;
+      tasks
+
+    Active -&gt;
+      List.filter (\task -&gt; not task.complete) tasks
+
+    Completed -&gt;
+      List.filter (\task -&gt; task.complete) tasks
 </code></pre></td></tr></table>
 </section>
 </section>
@@ -361,86 +538,19 @@ type alias User =
 <span class="l">8: </span>
 <span class="l">9: </span>
 </pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="c">// MODEL</span>
+<td class="snippet"><pre class="fssnip"><code lang="elm">type alias Model = (...) -- record type
 
-<span class="k">type</span> <span class="i">Model</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs1', 1)" onmouseover="showTip(event, 'fs1', 1)" class="i">int</span>
+type Msg = (...) -- union
 
-<span class="k">type</span> <span class="i">Msg</span> <span class="o">=</span>
-| <span class="i">Increment</span>
-| <span class="i">Decrement</span>
+update : Msg -&gt; Model -&gt; (Model, Cmd Msg)
+update msg model = (...)
 
-<span class="k">let</span> <span class="i">init</span>() <span class="o">:</span> <span class="i">Model</span> <span class="o">=</span> <span class="n">0</span>
-</code></pre></td>
-</tr>
-</table>
+view : Model -&gt; Html Msg
+view model = (...)
+</code></pre></td></tr></table>
 </section>
 <section >
 <h3>Model - View - Update</h3>
-<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
-<span class="l">2: </span>
-<span class="l">3: </span>
-<span class="l">4: </span>
-<span class="l">5: </span>
-<span class="l">6: </span>
-<span class="l">7: </span>
-</pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="c">// VIEW</span>
-
-<span class="k">let</span> <span class="i">view</span> <span class="i">model</span> <span class="i">dispatch</span> <span class="o">=</span>
-    <span class="i">div</span> []
-        [ <span class="i">button</span> [ <span class="i">OnClick</span> (<span class="k">fun</span> _ <span class="k">-&gt;</span> <span class="i">dispatch</span> <span class="i">Decrement</span>) ] [ <span class="i">str</span> <span class="s">&quot;-&quot;</span> ]
-          <span class="i">div</span> [] [ <span class="i">str</span> (<span class="i">model</span><span class="o">.</span><span class="i">ToString</span>()) ]
-          <span class="i">button</span> [ <span class="i">OnClick</span> (<span class="k">fun</span> _ <span class="k">-&gt;</span> <span class="i">dispatch</span> <span class="i">Increment</span>) ] [ <span class="i">str</span> <span class="s">&quot;+&quot;</span> ] ]
-</code></pre></td>
-</tr>
-</table>
-</section>
-<section >
-<h3>Model - View - Update</h3>
-<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
-<span class="l">2: </span>
-<span class="l">3: </span>
-<span class="l">4: </span>
-<span class="l">5: </span>
-<span class="l">6: </span>
-</pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="c">// UPDATE</span>
-
-<span class="k">let</span> <span class="i">update</span> (<span class="i">msg</span><span class="o">:</span><span class="i">Msg</span>) (<span class="i">model</span><span class="o">:</span><span class="i">Model</span>) <span class="o">=</span>
-    <span class="k">match</span> <span class="i">msg</span> <span class="k">with</span>
-    | <span class="i">Increment</span> <span class="k">-&gt;</span> <span class="i">model</span> <span class="o">+</span> <span class="n">1</span>
-    | <span class="i">Decrement</span> <span class="k">-&gt;</span> <span class="i">model</span> <span class="o">-</span> <span class="n">1</span>
-</code></pre></td>
-</tr>
-</table>
-</section>
-<section >
-<h3>Model - View - Update</h3>
-<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
-<span class="l">2: </span>
-<span class="l">3: </span>
-<span class="l">4: </span>
-<span class="l">5: </span>
-<span class="l">6: </span>
-</pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="c">// wiring things up</span>
-
-<span class="i">Program</span><span class="o">.</span><span class="i">mkSimple</span> <span class="i">init</span> <span class="i">update</span> <span class="i">view</span>
-<span class="o">|&gt;</span> <span class="i">Program</span><span class="o">.</span><span class="i">withConsoleTrace</span>
-<span class="o">|&gt;</span> <span class="i">Program</span><span class="o">.</span><span class="i">withReact</span> <span class="s">&quot;elmish-app&quot;</span>
-<span class="o">|&gt;</span> <span class="i">Program</span><span class="o">.</span><span class="i">run</span>
-</code></pre></td>
-</tr>
-</table>
-</section>
-<section >
-<h3>Model - View - Update</h3>
-<h1>Demo</h1>
-</section>
-</section>
-<section >
-<section >
-<h3>Sub-Components</h3>
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
 <span class="l"> 2: </span>
 <span class="l"> 3: </span>
@@ -452,117 +562,39 @@ type alias User =
 <span class="l"> 9: </span>
 <span class="l">10: </span>
 <span class="l">11: </span>
-<span class="l">12: </span>
-<span class="l">13: </span>
 </pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="c">// MODEL</span>
+<td class="snippet"><pre class="fssnip"><code lang="elm">type Msg 
+    = Increment 
+    | Decrement
 
-<span class="k">type</span> <span class="i">Model</span> <span class="o">=</span> {
-    <span class="i">Counters</span> <span class="o">:</span> <span class="i">Counter</span><span class="o">.</span><span class="i">Model</span> <span onmouseout="hideTip(event, 'fs2', 2)" onmouseover="showTip(event, 'fs2', 2)" class="i">list</span>
-}
+update msg model =
+  case msg of
+    Increment -&gt;
+      model + 1
 
-<span class="k">type</span> <span class="i">Msg</span> <span class="o">=</span> 
-| <span class="i">Insert</span>
-| <span class="i">Remove</span>
-| <span class="i">Modify</span> <span class="k">of</span> <span onmouseout="hideTip(event, 'fs1', 3)" onmouseover="showTip(event, 'fs1', 3)" class="i">int</span> <span class="o">*</span> <span class="i">Counter</span><span class="o">.</span><span class="i">Msg</span>
+    Decrement -&gt;
+      model - 1
 
-<span class="k">let</span> <span class="i">init</span>() <span class="o">:</span> <span class="i">Model</span> <span class="o">=</span>
-    { <span class="i">Counters</span> <span class="o">=</span> [] }
-</code></pre></td>
-</tr>
-</table>
+</code></pre></td></tr></table>
 </section>
 <section >
-<h3>Sub-Components</h3>
-<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
-<span class="l"> 2: </span>
-<span class="l"> 3: </span>
-<span class="l"> 4: </span>
-<span class="l"> 5: </span>
-<span class="l"> 6: </span>
-<span class="l"> 7: </span>
-<span class="l"> 8: </span>
-<span class="l"> 9: </span>
-<span class="l">10: </span>
-<span class="l">11: </span>
-<span class="l">12: </span>
-<span class="l">13: </span>
+<h3>Model - View - Update</h3>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
+<span class="l">2: </span>
+<span class="l">3: </span>
+<span class="l">4: </span>
+<span class="l">5: </span>
+<span class="l">6: </span>
 </pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="c">// VIEW</span>
-
-<span class="k">let</span> <span class="i">view</span> <span class="i">model</span> <span class="i">dispatch</span> <span class="o">=</span>
-    <span class="k">let</span> <span class="i">counterDispatch</span> <span class="i">i</span> <span class="i">msg</span> <span class="o">=</span> <span class="i">dispatch</span> (<span class="i">Modify</span> (<span class="i">i</span>, <span class="i">msg</span>))
-
-    <span class="k">let</span> <span class="i">counters</span> <span class="o">=</span>
-        <span class="i">model</span><span class="o">.</span><span class="i">Counters</span>
-        <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs3', 4)" onmouseover="showTip(event, 'fs3', 4)" class="i">List</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs4', 5)" onmouseover="showTip(event, 'fs4', 5)" class="i">mapi</span> (<span class="k">fun</span> <span class="i">i</span> <span class="i">c</span> <span class="k">-&gt;</span> <span class="i">Counter</span><span class="o">.</span><span class="i">view</span> <span class="i">c</span> (<span class="i">counterDispatch</span> <span class="i">i</span>)) 
-    
-    <span class="i">div</span> [] [ 
-        <span class="k">yield</span> <span class="i">button</span> [ <span class="i">OnClick</span> (<span class="k">fun</span> _ <span class="k">-&gt;</span> <span class="i">dispatch</span> <span class="i">Remove</span>) ] [  <span class="i">str</span> <span class="s">&quot;Remove&quot;</span> ]
-        <span class="k">yield</span> <span class="i">button</span> [ <span class="i">OnClick</span> (<span class="k">fun</span> _ <span class="k">-&gt;</span> <span class="i">dispatch</span> <span class="i">Insert</span>) ] [ <span class="i">str</span> <span class="s">&quot;Add&quot;</span> ] 
-        <span class="k">yield!</span> <span class="i">counters</span> ]
-</code></pre></td>
-</tr>
-</table>
-</section>
-<section >
-<h3>Sub-Components</h3>
-<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
-<span class="l"> 2: </span>
-<span class="l"> 3: </span>
-<span class="l"> 4: </span>
-<span class="l"> 5: </span>
-<span class="l"> 6: </span>
-<span class="l"> 7: </span>
-<span class="l"> 8: </span>
-<span class="l"> 9: </span>
-<span class="l">10: </span>
-<span class="l">11: </span>
-<span class="l">12: </span>
-<span class="l">13: </span>
-<span class="l">14: </span>
-<span class="l">15: </span>
-<span class="l">16: </span>
-<span class="l">17: </span>
-<span class="l">18: </span>
-<span class="l">19: </span>
-</pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="c">// UPDATE</span>
-
-<span class="k">let</span> <span class="i">update</span> (<span class="i">msg</span><span class="o">:</span><span class="i">Msg</span>) (<span class="i">model</span><span class="o">:</span><span class="i">Model</span>) <span class="o">=</span>
-    <span class="k">match</span> <span class="i">msg</span> <span class="k">with</span>
-    | <span class="i">Insert</span> <span class="k">-&gt;</span>
-        { <span class="i">Counters</span> <span class="o">=</span> <span class="i">Counter</span><span class="o">.</span><span class="i">init</span>() <span class="o">::</span> <span class="i">model</span><span class="o">.</span><span class="i">Counters</span> }
-    | <span class="i">Remove</span> <span class="k">-&gt;</span>
-        { <span class="i">Counters</span> <span class="o">=</span> 
-            <span class="k">match</span> <span class="i">model</span><span class="o">.</span><span class="i">Counters</span> <span class="k">with</span>
-            | [] <span class="k">-&gt;</span> []
-            | <span class="i">x</span> <span class="o">::</span> <span class="i">rest</span> <span class="k">-&gt;</span> <span class="i">rest</span> }
-    | <span class="i">Modify</span> (<span onmouseout="hideTip(event, 'fs5', 6)" onmouseover="showTip(event, 'fs5', 6)" class="i">id</span>, <span class="i">counterMsg</span>) <span class="k">-&gt;</span>
-        { <span class="i">Counters</span> <span class="o">=</span>
-            <span class="i">model</span><span class="o">.</span><span class="i">Counters</span>
-            <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs3', 7)" onmouseover="showTip(event, 'fs3', 7)" class="i">List</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs4', 8)" onmouseover="showTip(event, 'fs4', 8)" class="i">mapi</span> (<span class="k">fun</span> <span class="i">i</span> <span class="i">counterModel</span> <span class="k">-&gt;</span> 
-                <span class="k">if</span> <span class="i">i</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs5', 9)" onmouseover="showTip(event, 'fs5', 9)" class="i">id</span> <span class="k">then</span>
-                    <span class="i">Counter</span><span class="o">.</span><span class="i">update</span> <span class="i">counterMsg</span> <span class="i">counterModel</span>
-                <span class="k">else</span>
-                    <span class="i">counterModel</span>) }
-</code></pre></td>
-</tr>
-</table>
-</section>
-<section >
-<h3>Sub-Components</h3>
-<h1>Demo</h1>
-</section>
-</section>
-<section >
-<section >
-<h3>React</h3>
-<ul>
-<li>Facebook library for UI</li>
-<li><code>state =&gt; view</code></li>
-<li>Virtual DOM</li>
-</ul>
+<td class="snippet"><pre class="fssnip"><code lang="elm">view model =
+  div []
+    [ button [ onClick Decrement ] [ text "-" ]
+    , div [] [ text (toString model) ]
+    , button [ onClick Increment ] [ text "+" ]
+    ]
+</code></pre></td></tr></table>
+<br/>
+<br/>
 </section>
 <section >
 <h3>Virtual DOM - Initial</h3>
@@ -591,25 +623,24 @@ type alias User =
 <br />
 <p><small><a href="http://teropa.info/blog/2015/03/02/change-and-its-detection-in-javascript-frameworks.html&lt;/small&gt;">http://teropa.info/blog/2015/03/02/change-and-its-detection-in-javascript-frameworks.html</small></a></p>
 </section>
-</section>
 <section >
-<h3>ReactNative</h3>
-<p><img src="images/ReactNative.png" style="background: white;" /></p>
-<p><small><a href="http://timbuckley.github.io/react-native-presentation&lt;/small&gt;">http://timbuckley.github.io/react-native-presentation</small></a></p>
+<h3>Model - View - Update</h3>
+<h1><a href="http://elm-lang.org/examples/buttons">Demo</a></h1>
 </section>
-<section >
-<h3>Show me the code</h3>
 </section>
 <section >
 <h3>TakeAways</h3>
 <ul>
 <li>Learn all the FP you can!</li>
 <li>Simple modular design</li>
+<li>.Net fans? F# (Fable) + Elm!</li>
 </ul>
 </section>
 <section >
 <h3>Thank you!</h3>
 <ul>
+<li><a href="https://www.youtube.com/watch?v=vgsckgtVdoQ">https://www.youtube.com/watch?v=vgsckgtVdoQ</a></li>
+<li><a href="https://gist.github.com/yang-wei/4f563fbf81ff843e8b1e">https://gist.github.com/yang-wei/4f563fbf81ff843e8b1e</a></li>
 <li><a href="https://github.com/fable-compiler/fable-elmish">https://github.com/fable-compiler/fable-elmish</a></li>
 <li><a href="https://ionide.io">https://ionide.io</a></li>
 <li><a href="https://facebook.github.io/react-native/">https://facebook.github.io/react-native/</a></li>
