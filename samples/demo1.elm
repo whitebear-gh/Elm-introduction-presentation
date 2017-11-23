@@ -18,7 +18,7 @@ type Msg
 main =
   beginnerProgram { model = (Model 100), view = view, update = update }
 
-
+view: Model -> Html Msg
 view model =
   div [] [
     div []
