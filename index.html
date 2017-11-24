@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>React Native with F#</title>
-    <meta name="description" content="Introduction to React Native with F#">
+    <title>Introduction to Elm</title>
+    <meta name="description" content="Introduction to Elm">
     <meta name="author" content="Steffen Forkmann">
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -50,17 +50,17 @@
         <!-- Any section element inside of this container is displayed as a slide -->
         <div class="slides">
             <section >
-<h2>Elm language introduction</h2>
+<h2>Introduction to Elm</h2>
 <br />
 <br />
-<h3>different approach to websites development</h3>
+<h3>A different approach to web development</h3>
 <p><br />
 <br />
 Krzyś Jaworski - <a href="https://github.com/whitebear-gh/Elm-introduction-presentation/">@whitebear-gh</a></p>
-<p>Inspired by:
-<em> <a href="https://www.youtube.com/watch?v=rU-W6557Dos&amp;t=139s">Why Elm?</a>
-</em> <a href="https://www.youtube.com/watch?v=vgsckgtVdoQ">Introduction to ELM</a>
-* <a href="https://twitter.com/sforkmann">Elm with F#</a></p>
+<p>Inspired by:<br />
+<a href="https://www.youtube.com/watch?v=rU-W6557Dos&amp;t=139s">Why Elm?</a><br />
+<a href="https://www.youtube.com/watch?v=vgsckgtVdoQ">Introduction to ELM</a><br />
+<a href="https://twitter.com/sforkmann">Elm with F#</a></p>
 </section>
 <section >
 <section >
@@ -72,18 +72,18 @@ Krzyś Jaworski - <a href="https://github.com/whitebear-gh/Elm-introduction-pres
 </ul>
 </section>
 <section >
-<h3>Two way binding</h3>
+<h3>Two-way binding</h3>
 <h3>Dirty checks...</h3>
 <p><img src="images/elm-two-way-data-binding-angularjs.jpg" style="background: transparent; border-style: none;"  width=500 /></p>
 </section>
 <section >
 <h3>observables....</h3>
 <ul>
-<li>At some points there was even Object.observe added to browsers...</li>
+<li>At some point Object.observe was even available in JavaScript (browser's API)...</li>
 </ul>
 </section>
 <section >
-<h2>Nowadays frameworks prefer one-way bindnings</h2>
+<h2>Nowadays, popular frameworks prefer one-way bindings</h2>
 <ul>
 <li>React</li>
 <li>Angular 2+</li>
@@ -95,8 +95,8 @@ Krzyś Jaworski - <a href="https://github.com/whitebear-gh/Elm-introduction-pres
 <section >
 <h2>So, what is the issue here?</h2>
 <ul>
-<li>MVC works quite nice on the servers with stateless HTTP requests</li>
-<li>But in the browser... Data changes constantly, a lot of refreshes etc (similar to desktop apps like WPF)</li>
+<li>MVC works quite well with stateless HTTP requests (server side)</li>
+<li>But in the browser... the state changes constantly, a lot of refreshes etc (similar to desktop apps like WPF)</li>
 </ul>
 </section>
 <section >
@@ -108,13 +108,13 @@ Krzyś Jaworski - <a href="https://github.com/whitebear-gh/Elm-introduction-pres
 </ul>
 </section>
 <section >
-<h2>Hard to track where changes were done</h2>
+<h2>Hard to track when and where changes are made</h2>
 <p><img src="images/elm-angular-code.png" style="background: white;" width=500 /></p>
 </section>
 <section >
 <h2>Immutability</h2>
 <ul>
-<li>To avoid two way changes</li>
+<li>To avoid two-way changes</li>
 <li>thread safe</li>
 <li>...</li>
 </ul>
@@ -125,12 +125,12 @@ Krzyś Jaworski - <a href="https://github.com/whitebear-gh/Elm-introduction-pres
 <h2>ELM</h2>
 <h3>Soo... What is ELM ?</h3>
 <ul>
-<li>Purely functional functional language for front-end web development</li>
+<li>Purely functional language for front-end web development</li>
 </ul>
 </section>
 <section >
 <h2>Functional ????</h2>
-<h4>.... -&gt;</h4>
+<h4><strong>fun</strong> (x) -&gt; ...</h4>
 </section>
 <section >
 <h2>Programming languages</h2>
@@ -143,15 +143,15 @@ Krzyś Jaworski - <a href="https://github.com/whitebear-gh/Elm-introduction-pres
 </thead>
 <tbody>
 <tr class="odd">
-<td align="center"><p>Series of expressions</p></td>
+<td align="center"><p>series of expressions</p></td>
 <td align="center"><p>series of statements</p></td>
 </tr>
 <tr class="even">
-<td align="center"><p>Immutable state</p></td>
+<td align="center"><p>immutable state</p></td>
 <td align="center"><p>mutable state</p></td>
 </tr>
 <tr class="odd">
-<td align="center"><p>purity ( same inputs -&gt; same output)</p></td>
+<td align="center"><p>purity (same input -&gt; same output)</p></td>
 <td align="center"><p>side effects</p></td>
 </tr>
 </tbody>
@@ -163,16 +163,16 @@ Krzyś Jaworski - <a href="https://github.com/whitebear-gh/Elm-introduction-pres
 <h3>What is so unique in it?</h3>
 <ul>
 <li>
-Functional but beginner friendly
+Functional but beginner-friendly
 <ul>
-<li>Easy to understand concepts / learn</li>
-<li>Nice introduction to functional world</li>
+<li>Concepts are easy to understand and learn</li>
+<li>Nice introduction to the functional world</li>
 </ul>
 </li>
 <li>Statically typed</li>
 <li>Immutable data</li>
 <li>Funtional types system - no null</li>
-<li>No runtime excpetions</li>
+<li>No runtime exceptions!</li>
 <li>Consistent management of state (famous ELM architecture)</li>
 <li>
 Interoperability with JavaScript
@@ -180,10 +180,12 @@ Interoperability with JavaScript
 <li>compiles to JS</li>
 </ul>
 </li>
-<li>ELM time debugger</li>
+<li>ELM time-travel debugger</li>
 <li>...</li>
 </ul>
 </section>
+</section>
+<section >
 <section >
 <h2>Ok, Ok, but... functional?!</h2>
 </section>
@@ -218,7 +220,7 @@ add x y = x + y
 add2: number -&gt; number
 add2 = add 2
 
--- add2 y = add 2 y
+// add2 y = add 2 y
 </code></pre></td></tr></table>
 </section>
 <section >
@@ -233,10 +235,10 @@ add2 = add 2
 <span class="l">8: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip"><code lang="elm">isEven: Int -&gt; Bool
-isEven n = n % 2 ==0
+isEven n = n % 2 == 0
 
--- (&lt;&lt;) (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
--- not: Bool -&gt; Bool
+// (&lt;&lt;) (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+// not: Bool -&gt; Bool
 
 isOdd: Int -&gt; Bool
 isOdd: not &lt;&lt; isEven
@@ -259,19 +261,25 @@ isOdd: not &lt;&lt; isEven
 <span class="l">10: </span>
 <span class="l">11: </span>
 <span class="l">12: </span>
+<span class="l">13: </span>
+<span class="l">14: </span>
+<span class="l">15: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip"><code lang="elm">(|&gt;) : a -&gt; (a -&gt; b) -&gt; b
--- x |&gt; f == f x 
+// x |&gt; f is the same as f x 
 
-func: List number -&gt; String
-func list = list
-                |&gt; List.filter (\x -&gt; x &gt; 2)
-                |&gt; List.length
-                |&gt; toString
--- func [1,2,3,4,5] == "3"
+myFunction: List number -&gt; String
+myFunction someNumbers = 
+  someNumbers
+  |&gt; List.filter (\x -&gt; x &gt; 2)
+  |&gt; List.length
+  |&gt; toString
 
--- alternatively: 
-func = toString &lt;&lt; List.length &lt;&lt; List.filter (\x -&gt; x &gt; 2)
+// &gt; myFunction [1,2,3,4,5]
+// "3" : String
+
+// alternatively: 
+myFunction = toString &lt;&lt; List.length &lt;&lt; List.filter (\x -&gt; x &gt; 2)
 </code></pre></td></tr></table>
 </section>
 <section >
@@ -287,37 +295,55 @@ func = toString &lt;&lt; List.length &lt;&lt; List.filter (\x -&gt; x &gt; 2)
 <span class="l"> 9: </span>
 <span class="l">10: </span>
 <span class="l">11: </span>
+<span class="l">12: </span>
+<span class="l">13: </span>
+<span class="l">14: </span>
+<span class="l">15: </span>
+<span class="l">16: </span>
+<span class="l">17: </span>
 </pre></td>
-<td class="snippet"><pre class="fssnip"><code lang="elm">listSum: List number -&gt; number
-listSum: list =
-    case list of 
+<td class="snippet"><pre class="fssnip"><code lang="elm">listSum : List number -&gt; number
+listSum myList =
+    case myList of
         [] -&gt; 0
-        x::xs -&gt; x + listSum xs
+        x :: xs -&gt; x + listSum xs
+
+// &gt; listSum [1,2] 
+// 3 : number
 
 listLength: List a -&gt; number
-listLength: list =
-    case list of 
+listLength myList =
+    case myList of
         [] -&gt; 0
-        _::xs -&gt; 1 + listLength xs
+        _ :: xs -&gt; 1 + listLength xs
+
+// &gt; listLength [1,2] 
+// 2 : number
 </code></pre></td></tr></table>
 </section>
 <section >
 <h3>Functions as first class values</h3>
-<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
-<span class="l">2: </span>
-<span class="l">3: </span>
-<span class="l">4: </span>
-<span class="l">5: </span>
-<span class="l">6: </span>
-<span class="l">7: </span>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
+<span class="l"> 2: </span>
+<span class="l"> 3: </span>
+<span class="l"> 4: </span>
+<span class="l"> 5: </span>
+<span class="l"> 6: </span>
+<span class="l"> 7: </span>
+<span class="l"> 8: </span>
+<span class="l"> 9: </span>
+<span class="l">10: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip"><code lang="elm">listFilter: (a -&gt; Bool) -&gt; List a -&gt; List a
-listFilter: fn list =
-    case list of 
+listFilter fn myList =
+    case myList of 
         [] -&gt; []
         x::xs -&gt; 
-            f fn x then x::(listFilter fn xs)
+            if fn x then x::(listFilter fn xs)
             else listFilter fn xs
+
+// &gt; listFilter (\x -&gt; x == 2) [1,2,1,2,1,2] 
+// [2,2,2] : List number
 </code></pre></td></tr></table>
 </section>
 <section >
@@ -329,14 +355,16 @@ listFilter: fn list =
 <span class="l">5: </span>
 <span class="l">6: </span>
 <span class="l">7: </span>
+<span class="l">8: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip"><code lang="elm">type alias UserName = String
 type alias UserId = Int
+
 type alias User = 
     { name: UserName
-    , id: IserId
+    , id: UserId
     }
--- helpful with designing by types
+// types as a helpful design tool!
 </code></pre></td></tr></table>
 </section>
 <section >
@@ -376,13 +404,13 @@ let
   (a,b,c) = myTuple
 in 
   a ++ b ++ c
--- "ABC" : String
+// result is "ABC"
 
 let
   (a,b,c,(x,y,z)) = myNestedTuple
 in
   a ++ b ++ c ++ x ++ y ++ z
--- "ABCXYZ" : String
+// result is "ABCXYZ"
 </code></pre></td></tr></table>
 </section>
 <section >
@@ -401,9 +429,8 @@ in
 <span class="l">12: </span>
 <span class="l">13: </span>
 <span class="l">14: </span>
-<span class="l">15: </span>
 </pre></td>
-<td class="snippet"><pre class="fssnip"><code lang="elm">isOrdered : (String, String, String) -&gt; String
+<td class="snippet"><pre class="fssnip"><code lang="elm">isOrdered: (String, String, String) -&gt; String
 isOrdered tuple =
  case tuple of
   ("A","B","C") as orderedTuple -&gt;
@@ -412,12 +439,11 @@ isOrdered tuple =
   (_,_,_) as unorderedTuple -&gt;
     toString unorderedTuple ++ " is an unordered tuple."
 
+// &gt; isOrdered myTuple
+// "(\"A\",\"B\",\"C\") is an ordered tuple."
 
-&gt; isOrdered myTuple
--- "(\"A\",\"B\",\"C\") is an ordered tuple."
-
-&gt; isOrdered ("B", "C", "A")
--- "(\"B\",\"C\",\"A\") is an unordered tuple."
+// &gt; isOrdered ("B", "C", "A")
+// "(\"B\",\"C\",\"A\") is an unordered tuple."
 </code></pre></td></tr></table>
 </section>
 <section >
@@ -460,12 +486,6 @@ Completed : Visibility
 <span class="l">11: </span>
 <span class="l">12: </span>
 <span class="l">13: </span>
-<span class="l">14: </span>
-<span class="l">15: </span>
-<span class="l">16: </span>
-<span class="l">17: </span>
-<span class="l">18: </span>
-<span class="l">19: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip"><code lang="elm">type alias Task = { task : String, complete : Bool }
 
@@ -480,12 +500,6 @@ drink =
 tasks : List Task
 tasks =
   [ buy, drink ]
-
--- keep : Visibility -&gt; List Task -&gt; List Task
-
--- keep All tasks == [buy,drink]
--- keep Active tasks == [drink]
--- keep Complete tasks == [buy]
 </code></pre></td></tr></table>
 </section>
 <section >
@@ -503,22 +517,20 @@ tasks =
 <span class="l">11: </span>
 <span class="l">12: </span>
 <span class="l">13: </span>
-<span class="l">14: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip"><code lang="elm">type Visibility = All | Active | Completed
 type alias Task = { task : String, complete : Bool }
 
-filterTasks : Visibility -&gt; List Task -&gt; List Task
-filterTasks visibility tasks =
+keep: Visibility -&gt; List Task -&gt; List Task
+keep visibility tasks =
   case visibility of
-    All -&gt;
-      tasks
+    All -&gt; tasks
+    Active -&gt; List.filter (\task -&gt; not task.complete) tasks
+    Completed -&gt; List.filter (\task -&gt; task.complete) tasks
 
-    Active -&gt;
-      List.filter (\task -&gt; not task.complete) tasks
-
-    Completed -&gt;
-      List.filter (\task -&gt; task.complete) tasks
+// keep All tasks      returns [buy,drink]
+// keep Active tasks   returns [drink]
+// keep Complete tasks returns [buy]
 </code></pre></td></tr></table>
 </section>
 </section>
@@ -541,14 +553,14 @@ filterTasks visibility tasks =
 <span class="l">8: </span>
 <span class="l">9: </span>
 </pre></td>
-<td class="snippet"><pre class="fssnip"><code lang="elm">type alias Model = (...) -- record type
+<td class="snippet"><pre class="fssnip"><code lang="elm">type alias Model = (...) // record type
 
-type Msg = (...) -- union
+type Msg = (...) // union type
 
-update : Msg -&gt; Model -&gt; (Model, Cmd Msg)
+update: Msg -&gt; Model -&gt; (Model, Cmd Msg)
 update msg model = (...)
 
-view : Model -&gt; Html Msg
+view: Model -&gt; Html Msg
 view model = (...)
 </code></pre></td></tr></table>
 </section>
