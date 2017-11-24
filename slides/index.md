@@ -41,7 +41,7 @@ Inspired by:
 
 ### observables....
 
-* At some point Object.observe was even available in JavaScript...
+* At some point Object.observe was even available in JavaScript (browser's API)...
 
 ---
 
@@ -55,7 +55,7 @@ Inspired by:
 
 ## So, what is the issue here?
 
-* MVC works quite well with stateless HTTP requests 
+* MVC works quite well with stateless HTTP requests (server side)
 * But in the browser... the state changes constantly, a lot of refreshes etc (similar to desktop apps like WPF)
 
 
@@ -97,7 +97,7 @@ Inspired by:
 
 ## Functional ????
 
-#### .... ->
+#### **fun** (x) -> ...
 
 
 ---
@@ -130,7 +130,7 @@ Inspired by:
 * ELM time-travel debugger
 * ...
 
----
+***
 
 ## Ok, Ok, but... functional?!
 
@@ -191,7 +191,9 @@ myFunction someNumbers =
   |> List.filter (\x -> x > 2)
   |> List.length
   |> toString
-// myFunction [1,2,3,4,5] returns "3"
+
+// > myFunction [1,2,3,4,5]
+// "3" : String
 
 // alternatively: 
 myFunction = toString << List.length << List.filter (\x -> x > 2)
@@ -207,14 +209,18 @@ listSum myList =
     case myList of
         [] -> 0
         x :: xs -> x + listSum xs
-// listSum [1,2] returns 3
+
+// > listSum [1,2] 
+// 3 : number
 
 listLength: List a -> number
 listLength myList =
     case myList of
         [] -> 0
         _ :: xs -> 1 + listLength xs
-// listLength [1,2] returns 2
+
+// > listLength [1,2] 
+// 2 : number
 ```
 ---
 
@@ -228,7 +234,9 @@ listFilter fn myList =
         x::xs -> 
             if fn x then x::(listFilter fn xs)
             else listFilter fn xs
-// listFilter (\x -> x == 2) [1,2,1,2,1,2] returns [2,2,2]
+
+// > listFilter (\x -> x == 2) [1,2,1,2,1,2] 
+// [2,2,2] : List number
 ```
 ---
 
@@ -291,12 +299,11 @@ isOrdered tuple =
   (_,_,_) as unorderedTuple ->
     toString unorderedTuple ++ " is an unordered tuple."
 
+// > isOrdered myTuple
+// "(\"A\",\"B\",\"C\") is an ordered tuple."
 
-> isOrdered myTuple
-"(\"A\",\"B\",\"C\") is an ordered tuple."
-
-> isOrdered ("B", "C", "A")
-"(\"B\",\"C\",\"A\") is an unordered tuple."
+// > isOrdered ("B", "C", "A")
+// "(\"B\",\"C\",\"A\") is an unordered tuple."
 ```
 
 ---
