@@ -1,26 +1,26 @@
-- title : React Native with F#
-- description : Introduction to React Native with F#
+- title : Introduction to Elm
+- description : Introduction to Elm
 - author : Steffen Forkmann
 - theme : night
 - transition : default
 
 ***
 
-## Elm language introduction
+## Introduction to Elm
 
 <br />
 <br />
 
-### different approach to websites development
+### A different approach to web development
 
 <br />
 <br />
 Krzyś Jaworski - [@whitebear-gh](https://github.com/whitebear-gh/Elm-introduction-presentation/)
 
-Inspired by: 
-* [Why Elm?](https://www.youtube.com/watch?v=rU-W6557Dos&t=139s)
-* [Introduction to ELM](https://www.youtube.com/watch?v=vgsckgtVdoQ)
-* [Elm with F#](https://twitter.com/sforkmann)
+Inspired by:  
+[Why Elm?](https://www.youtube.com/watch?v=rU-W6557Dos&t=139s)  
+[Introduction to ELM](https://www.youtube.com/watch?v=vgsckgtVdoQ)  
+[Elm with F#](https://twitter.com/sforkmann)
 
 ***
 
@@ -32,7 +32,7 @@ Inspired by:
 
 ---
 
-### Two way binding
+### Two-way binding
 ### Dirty checks... 
 
  <img src="images/elm-two-way-data-binding-angularjs.jpg" style="background: transparent; border-style: none;"  width=500 />
@@ -41,11 +41,11 @@ Inspired by:
 
 ### observables....
 
-* At some points there was even Object.observe added to browsers...
+* At some point Object.observe was even available in JavaScript...
 
 ---
 
-## Nowadays frameworks prefer one-way bindnings
+## Nowadays, popular frameworks prefer one-way bindings
 
 * React
 * Angular 2+
@@ -55,8 +55,8 @@ Inspired by:
 
 ## So, what is the issue here?
 
-* MVC works quite nice on the servers with stateless HTTP requests 
-* But in the browser... Data changes constantly, a lot of refreshes etc (similar to desktop apps like WPF)
+* MVC works quite well with stateless HTTP requests 
+* But in the browser... the state changes constantly, a lot of refreshes etc (similar to desktop apps like WPF)
 
 
 ---
@@ -69,7 +69,7 @@ Inspired by:
 
 ---
 
-## Hard to track where changes were done
+## Hard to track when and where changes are made
 
  <img src="images/elm-angular-code.png" style="background: white;" width=500 />
 
@@ -77,7 +77,7 @@ Inspired by:
 
 ## Immutability 
 
-* To avoid two way changes
+* To avoid two-way changes
 * thread safe
 * ...
 
@@ -90,7 +90,7 @@ Inspired by:
 
 ### Soo... What is ELM ?
 
-* Purely functional functional language for front-end web development
+* Purely functional language for front-end web development
 
 
 ---
@@ -107,9 +107,9 @@ Inspired by:
 
 | Functional  | Imperative  |
 |:-:|:-:|
-| Series of expressions   | series of statements  |
-| Immutable state | mutable state |
-| purity ( same inputs -> same output)  | side effects |
+| series of expressions   | series of statements  |
+| immutable state | mutable state |
+| purity (same input -> same output)  | side effects |
 
 --- 
 
@@ -117,17 +117,17 @@ Inspired by:
 
 ### What is so unique in it?
 
-* Functional but beginner friendly 
-    - Easy to understand concepts / learn
-    - Nice introduction to functional world
+* Functional but beginner-friendly 
+    - Concepts are easy to understand and learn 
+    - Nice introduction to the functional world
 * Statically typed
 * Immutable data
 * Funtional types system - no null
-* No runtime excpetions
+* No runtime exceptions!
 * Consistent management of state (famous ELM architecture)
 * Interoperability with JavaScript
     * compiles to JS
-* ELM time debugger
+* ELM time-travel debugger
 * ...
 
 ---
@@ -157,7 +157,7 @@ add x y = x + y
 add2: number -> number
 add2 = add 2
 
--- add2 y = add 2 y
+// add2 y = add 2 y
 ```
 
 ---
@@ -166,10 +166,10 @@ add2 = add 2
 
 ```elm
 isEven: Int -> Bool
-isEven n = n % 2 ==0
+isEven n = n % 2 == 0
 
--- (<<) (b -> c) -> (a -> b) -> a -> c
--- not: Bool -> Bool
+// (<<) (b -> c) -> (a -> b) -> a -> c
+// not: Bool -> Bool
 
 isOdd: Int -> Bool
 isOdd: not << isEven
@@ -183,17 +183,18 @@ isOdd: not << isEven
 
 ```elm
 (|>) : a -> (a -> b) -> b
--- x |> f == f x 
+// x |> f is the same as f x 
 
-func: List number -> String
-func list = list
-                |> List.filter (\x -> x > 2)
-                |> List.length
-                |> toString
--- func [1,2,3,4,5] == "3"
+myFunction: List number -> String
+myFunction someNumbers = 
+  someNumbers
+  |> List.filter (\x -> x > 2)
+  |> List.length
+  |> toString
+// myFunction [1,2,3,4,5] returns "3"
 
--- alternatively: 
-func = toString << List.length << List.filter (\x -> x > 2)
+// alternatively: 
+myFunction = toString << List.length << List.filter (\x -> x > 2)
 ```
 
 ---
@@ -201,17 +202,19 @@ func = toString << List.length << List.filter (\x -> x > 2)
 ### Pattern matching
 
 ```elm
-listSum: List number -> number
-listSum: list =
-    case list of 
+listSum : List number -> number
+listSum myList =
+    case myList of
         [] -> 0
-        x::xs -> x + listSum xs
+        x :: xs -> x + listSum xs
+// listSum [1,2] returns 3
 
 listLength: List a -> number
-listLength: list =
-    case list of 
+listLength myList =
+    case myList of
         [] -> 0
-        _::xs -> 1 + listLength xs
+        _ :: xs -> 1 + listLength xs
+// listLength [1,2] returns 2
 ```
 ---
 
@@ -219,12 +222,13 @@ listLength: list =
 
 ```elm
 listFilter: (a -> Bool) -> List a -> List a
-listFilter: fn list =
-    case list of 
+listFilter fn myList =
+    case myList of 
         [] -> []
         x::xs -> 
-            f fn x then x::(listFilter fn xs)
+            if fn x then x::(listFilter fn xs)
             else listFilter fn xs
+// listFilter (\x -> x == 2) [1,2,1,2,1,2] returns [2,2,2]
 ```
 ---
 
@@ -233,11 +237,12 @@ listFilter: fn list =
 ```elm
 type alias UserName = String
 type alias UserId = Int
+
 type alias User = 
     { name: UserName
-    , id: IserId
+    , id: UserId
     }
--- helpful with designing by types
+// types as a helpful design tool!
 ```
 
 ---
@@ -263,13 +268,13 @@ let
   (a,b,c) = myTuple
 in 
   a ++ b ++ c
--- "ABC" : String
+// result is "ABC"
 
 let
   (a,b,c,(x,y,z)) = myNestedTuple
 in
   a ++ b ++ c ++ x ++ y ++ z
--- "ABCXYZ" : String
+// result is "ABCXYZ"
 ```
 
 ---
@@ -277,7 +282,7 @@ in
 ### Tuples - pattern matching
 
 ```elm
-isOrdered : (String, String, String) -> String
+isOrdered: (String, String, String) -> String
 isOrdered tuple =
  case tuple of
   ("A","B","C") as orderedTuple ->
@@ -288,10 +293,10 @@ isOrdered tuple =
 
 
 > isOrdered myTuple
--- "(\"A\",\"B\",\"C\") is an ordered tuple."
+"(\"A\",\"B\",\"C\") is an ordered tuple."
 
 > isOrdered ("B", "C", "A")
--- "(\"B\",\"C\",\"A\") is an unordered tuple."
+"(\"B\",\"C\",\"A\") is an unordered tuple."
 ```
 
 ---
@@ -329,12 +334,6 @@ drink =
 tasks : List Task
 tasks =
   [ buy, drink ]
-
--- keep : Visibility -> List Task -> List Task
-
--- keep All tasks == [buy,drink]
--- keep Active tasks == [drink]
--- keep Complete tasks == [buy]
 ```
 
 ---
@@ -345,17 +344,16 @@ tasks =
 type Visibility = All | Active | Completed
 type alias Task = { task : String, complete : Bool }
 
-filterTasks : Visibility -> List Task -> List Task
-filterTasks visibility tasks =
+keep: Visibility -> List Task -> List Task
+keep visibility tasks =
   case visibility of
-    All ->
-      tasks
+    All -> tasks
+    Active -> List.filter (\task -> not task.complete) tasks
+    Completed -> List.filter (\task -> task.complete) tasks
 
-    Active ->
-      List.filter (\task -> not task.complete) tasks
-
-    Completed ->
-      List.filter (\task -> task.complete) tasks
+// keep All tasks      returns [buy,drink]
+// keep Active tasks   returns [drink]
+// keep Complete tasks returns [buy]
 ```
 
 *** 
@@ -376,14 +374,14 @@ filterTasks visibility tasks =
 
 
 ```elm
-type alias Model = (...) -- record type
+type alias Model = (...) // record type
 
-type Msg = (...) -- union
+type Msg = (...) // union type
 
-update : Msg -> Model -> (Model, Cmd Msg)
+update: Msg -> Model -> (Model, Cmd Msg)
 update msg model = (...)
 
-view : Model -> Html Msg
+view: Model -> Html Msg
 view model = (...)
 ```
 ---
